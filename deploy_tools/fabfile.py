@@ -3,7 +3,7 @@ from fabric.api import env, local, run
 import random
 
 REPO_URL = 'https://github.com/Astronautandall/tdd.git'
-
+env.key_filename = '/Users/bryanz/Projects/Learning/awscourse/EC2Tutorial.pem'
 
 def _create_directory_structure_if_necessary(site_folder):
     for subfolder in ('database', 'static', 'virtualenv', 'source'):
@@ -12,12 +12,12 @@ def _create_directory_structure_if_necessary(site_folder):
 
 def _get_latest_source(source_folder):
     if exists(source_folder + '/.git'):
-        run(f'cd {source_folder} && fit fetch')
+        run(f'cd {source_folder} && git fetch')
     else:
         run(f'git clone {REPO_URL} {source_folder}')
 
-    current_comit = local("git log -n 1 --format=∞H", capture=True)
-    run(f'cd {source_folder} && git reset --hard {current_comit}')
+    current_commit = local("git log -n 1 --format=%H", capture=True)
+    run(f'cd {source_folder} && git reset --hard {current_commit}')
 
 
 def _update_settings(source_folder, site_name):
@@ -54,7 +54,6 @@ def _update_database(source_folder):
         f'cd {source_folder}'
         ' && ../virtualenv/bin/python manage.py migrate --noinput'
     )
-
 
 
 def deploy():
