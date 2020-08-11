@@ -25,7 +25,7 @@ SECRET_KEY = 'olk2l%hnf@!^5u^!@2++ywy&+zi3qyw1kjjlp8)-r=txc=#aro'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["staging.bryanzambrano.com", "live.bryanzambrano.com"]
 
 
 # Application definition
